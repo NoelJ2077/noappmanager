@@ -1,0 +1,18 @@
+{
+  "name": "noappmanager",
+  "version": "1.0.0",
+  "description": "Einfacher Task-Manager - M324 DevOps Projekt",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest --forceExit"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
