@@ -22,6 +22,9 @@ jobs:
       - name: Abhaengigkeiten installieren
         run: npm ci
 
+      - name: Linter ausfuehren
+        run: npm run lint
+
       - name: Tests ausfuehren
         run: npm test
 
