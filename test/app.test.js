@@ -52,12 +52,11 @@ describe('Tasks API', () => {
     expect(res.statusCode).toBe(204);
   });
 
-  // ABSICHTLICHER FEHLER fuer Issue #4 - falscher Statuscode
   it('POST /tasks - sollte Fehler bei fehlendem Titel zurueckgeben', async () => {
     const res = await request(app)
       .post('/tasks')
       .send({ description: 'Kein Titel vorhanden' });
-    expect(res.statusCode).toBe(200); // BUG: sollte 400 sein!
+    expect(res.statusCode).toBe(400);
   });
 
   it('GET /tasks/:id - sollte 404 bei unbekannter ID zurueckgeben', async () => {
