@@ -1,0 +1,50 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js 18 einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+
+      - name: Tests ausfuehren
+        run: npm test
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Docker Image bauen
+        run: docker build -t noappmanager:${{ github.sha }} .
+
+      - name: Bei Docker Hub anmelden
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Docker Image taggen und pushen
+        run: |
+          docker tag noappmanager:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/noappmanager:latest
+          docker tag noappmanager:${{ github.sha }} ${{ secrets.DOCKER_HUB_USERNAME }}/noappmanager:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/noappmanager:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/noappmanager:${{ github.sha }}
