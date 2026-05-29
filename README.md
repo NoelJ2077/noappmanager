@@ -2,6 +2,8 @@
 
 Einfacher Task-Manager als REST-API. Entwickelt im Rahmen des M324 DevOps-Moduls an der Benedict Schule.
 
+Sprachen: EN/DE (gemischt)
+
 ## Team
 - **Ahmed** – Commits 1, 3, 4, 7
 - **Noel** – Commits 2, 5, 6, 8
@@ -38,12 +40,13 @@ cp .env.example .env
 ```
 
 ## API-Endpunkte
+(Einige Routen funktionieren noch nicht einwandfrei)
 
-| Methode | Pfad         | Beschreibung             |
-|---------|--------------|--------------------------|
-| GET     | /            | Willkommensnachricht     |
-| GET     | /tasks       | Alle Tasks abrufen       |
-| GET     | /tasks/:id   | Einzelnen Task abrufen   |
-| POST    | /tasks       | Neuen Task erstellen     |
-| PUT     | /tasks/:id   | Task aktualisieren       |
-| DELETE  | /tasks/:id   | Task löschen             |
+| Methode | Pfad         | Beschreibung                      |
+|---------|--------------|-----------------------------------|
+| GET     | /            | Willkommensnachricht              |
+| GET     | /tasks       | Alle Tasks abrufen                |
+| GET     | /tasks/:id   | Einzelnen Task abrufen            |
+| POST    | /tasks       | Neuen Task erstellen              |
+| PUT     | /tasks/:id   | Task aktualisieren                |
+| DELETE  | /tasks/:id   | Task löschen                      |
